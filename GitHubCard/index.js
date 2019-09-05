@@ -3,7 +3,7 @@
            https://api.github.com/users/<your name>
 */
 
-axios.get("https://api.github.com/users/VictorArowo")
+let rawData = axios.get("https://api.github.com/users/VictorArowo")
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -15,6 +15,11 @@ axios.get("https://api.github.com/users/VictorArowo")
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+rawData
+    .then(data => cardCreator(data.data))
+    .then(card => document.querySelector(".cards").append(card));
+
+
 
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
@@ -47,7 +52,8 @@ const followersArray = [];
 </div>
 
 */
-cardCreator = ({image_url, name, user_name, location, address, followers, following, bio}) => {
+cardCreator = ({avatar_url, name, login, location,
+     html_url, followers, following, bio}) => {
     const outerDiv = document.createElement("div");
     const img = document.createElement("img");
     const innerDiv = document.createElement("div");
@@ -65,16 +71,16 @@ cardCreator = ({image_url, name, user_name, location, address, followers, follow
     h3.classList.add("name");
     pUserName.classList.add("username");
 
-    img.setAttribute("src", image_url);
-    a.setAttribute("href", address);
+    img.setAttribute("src", avatar_url);
+    a.setAttribute("href", html_url);
 
     h3.textContent = name;
-    pUserName.textContent = user_name;
-    pLocation.textContent = location;
+    pUserName.textContent = login;
+    pLocation.textContent = `Location: ${location}`;
     pProfie.textContent = "Profile: "
-    a.textContent = address;
-    pFollowers.textContent = followers;
-    pFollowing.textContent = following;
+    a.textContent = html_url;
+    pFollowers.textContent = `Followers: ${followers}`;
+    pFollowing.textContent = `Following: ${following}`;
     pBio.textContent = `Bio: ${bio}`;
 
     pProfie.append(a);
@@ -89,6 +95,8 @@ cardCreator = ({image_url, name, user_name, location, address, followers, follow
 
     outerDiv.append(img);
     outerDiv.append(innerDiv);
+
+    return outerDiv;
 }
 
 /* List of LS Instructors Github username's: 
