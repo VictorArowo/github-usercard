@@ -30,13 +30,22 @@ rawData
           Using that array, iterate over it, requesting data for each user, creating a new card for each
           user, and adding that card to the DOM.
 */
+function appendFollowers() {
+    followersArray.forEach(a => {
+        axios.get(`https://api.github.com/users/${a}`)
+        .then(data => cardCreator(data.data))
+        .then(card => document.querySelector(".cards").append(card));
+    })
+}
 
 let followersArray = [];
+
 axios.get("https://api.github.com/users/VictorArowo/followers")
-    .then(data => data.data.forEach(a => {
-        let card = cardCreator(a);
-        document.querySelector(".cards").append(card);
-    }));
+    .then(data => data.data.forEach(a => followersArray.push(a.login)))
+    .then(() => appendFollowers());
+
+
+
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
@@ -70,6 +79,7 @@ cardCreator = ({avatar_url, name, login, location,
     const pFollowers = document.createElement("p");
     const pFollowing = document.createElement("p");
     const pBio = document.createElement("p");
+    const button = document.createElement("button");
 
     outerDiv.classList.add("card");
     innerDiv.classList.add("card-info");
@@ -87,6 +97,19 @@ cardCreator = ({avatar_url, name, login, location,
     pFollowers.textContent = `Followers: ${followers}`;
     pFollowing.textContent = `Following: ${following}`;
     pBio.textContent = `Bio: ${bio}`;
+    button.textContent = "Less Info";
+
+    button.addEventListener("click", () => {
+        outerDiv.classList.toggle("reduce");
+        img.classList.toggle("contract");
+        pUserName.classList.toggle("contract");
+        pProfie.classList.toggle("contract");
+        pFollowing.classList.toggle("contract");
+        pFollowers.classList.toggle("contract");
+        pBio.classList.toggle("contract");
+        
+        button.textContent === "More Info" ? button.textContent = "Less Info": button.textContent = "More Info";
+    });
 
     pProfie.append(a);
 
@@ -97,6 +120,7 @@ cardCreator = ({avatar_url, name, login, location,
     innerDiv.append(pFollowers);
     innerDiv.append(pFollowing);
     innerDiv.append(pBio);
+    innerDiv.append(button);    
 
     outerDiv.append(img);
     outerDiv.append(innerDiv);
