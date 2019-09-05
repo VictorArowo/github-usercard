@@ -3,6 +3,8 @@
            https://api.github.com/users/<your name>
 */
 
+axios.get("https://api.github.com/users/VictorArowo")
+
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
    data in order to use it to build your component function 
@@ -45,6 +47,49 @@ const followersArray = [];
 </div>
 
 */
+cardCreator = ({image_url, name, user_name, location, address, followers, following, bio}) => {
+    const outerDiv = document.createElement("div");
+    const img = document.createElement("img");
+    const innerDiv = document.createElement("div");
+    const h3 = document.createElement("h3");
+    const pUserName = document.createElement("p");
+    const pLocation = document.createElement("p");
+    const pProfie = document.createElement("p");
+    const a = document.createElement("a");
+    const pFollowers = document.createElement("p");
+    const pFollowing = document.createElement("p");
+    const pBio = document.createElement("p");
+
+    outerDiv.classList.add("card");
+    innerDiv.classList.add("card-info");
+    h3.classList.add("name");
+    pUserName.classList.add("username");
+
+    img.setAttribute("src", image_url);
+    a.setAttribute("href", address);
+
+    h3.textContent = name;
+    pUserName.textContent = user_name;
+    pLocation.textContent = location;
+    pProfie.textContent = "Profile: "
+    a.textContent = address;
+    pFollowers.textContent = followers;
+    pFollowing.textContent = following;
+    pBio.textContent = `Bio: ${bio}`;
+
+    pProfie.append(a);
+
+    innerDiv.append(h3);
+    innerDiv.append(pUserName);
+    innerDiv.append(pLocation);
+    innerDiv.append(pProfie);
+    innerDiv.append(pFollowers);
+    innerDiv.append(pFollowing);
+    innerDiv.append(pBio);
+
+    outerDiv.append(img);
+    outerDiv.append(innerDiv);
+}
 
 /* List of LS Instructors Github username's: 
   tetondan
