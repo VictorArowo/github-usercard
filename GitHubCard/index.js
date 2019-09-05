@@ -31,7 +31,13 @@ rawData
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+let followersArray = [];
+axios.get("https://api.github.com/users/VictorArowo/followers")
+    .then(data => data.data.forEach(a => {
+        debugger;
+        let card = cardCreator(a);
+        document.querySelector(".cards").append(card);
+    }));
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
