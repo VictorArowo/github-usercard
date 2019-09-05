@@ -125,3 +125,17 @@ body {
 
 
 
+.calendar{
+  background: white;
+  text-align: center;
+  margin-left: -5px !important;
+  margin-bottom: 30px !important;
+}
+
+.calendar > *{
+  transform: scale(0.8);
+}
+
+.calendar-graph{
+  margin-left: -50px
+}

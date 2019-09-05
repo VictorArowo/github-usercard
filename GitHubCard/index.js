@@ -34,7 +34,6 @@ rawData
 let followersArray = [];
 axios.get("https://api.github.com/users/VictorArowo/followers")
     .then(data => data.data.forEach(a => {
-        debugger;
         let card = cardCreator(a);
         document.querySelector(".cards").append(card);
     }));
