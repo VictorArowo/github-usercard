@@ -125,3 +125,46 @@ body {
 
 
 
+.calendar{
+  background: white;
+  text-align: center;
+  margin-left: -5px !important;
+  margin-bottom: 30px !important;
+}
+
+.calendar > *{
+  transform: scale(0.8);
+}
+
+.calendar-graph{
+  margin-left: -50px
+}
+
+
+button{
+  width: 100px;
+  height: 40px;
+  border: none;
+  color: white;
+  background: red;
+  margin: 20px;
+  border-radius: 20px;
+  outline: none;
+}
+
+.contract{
+  display: none;
+}
+
+.reduce{
+  height: 150px;
+  text-align: center;
+}
+
+.reduce button{
+  background-color: green;
+}
+
+.card.reduce .card-info{
+  margin: 0px auto;
+}
